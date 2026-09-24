@@ -1,7 +1,7 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import growth from "../images/growth.png"
-
+import growth from "../images/growth.png";
 
 const focusAreas = [
   "Confidence & Mindset Coaching",
@@ -12,14 +12,88 @@ const focusAreas = [
   "Skill Gap Analysis",
 ];
 
+const contentVariants = {
+  hidden: {
+    opacity: 0,
+    x: -45,
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const panelVariants = {
+  hidden: {
+    opacity: 0,
+    x: 50,
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.85,
+      delay: 0.1,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
+const listVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      delayChildren: 0.25,
+      staggerChildren: 0.09,
+    },
+  },
+};
+
+const listItemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 18,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+};
+
 function CareerGrowth() {
   return (
     <section
       id="coaching"
       className="relative overflow-hidden bg-[#F3F7FB]"
     >
-      {/* Background landscape */}
-      <div className="absolute inset-y-0 left-0 hidden w-[46%] lg:block">
+      {/* Desktop background landscape */}
+      <motion.div
+        initial={{
+          opacity: 0,
+          scale: 1.05,
+        }}
+        whileInView={{
+          opacity: 1,
+          scale: 1,
+        }}
+        viewport={{
+          once: true,
+          amount: 0.2,
+        }}
+        transition={{
+          duration: 1.1,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+        className="absolute inset-y-0 left-0 hidden w-[46%] lg:block"
+      >
         <img
           src={growth}
           alt=""
@@ -27,25 +101,52 @@ function CareerGrowth() {
           className="h-full w-full object-cover object-center"
         />
 
-        {/* Blend the image into the section */}
         <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-[#F3F7FB]" />
-      </div>
+      </motion.div>
 
       <div className="relative mx-auto max-w-[1500px]">
         <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr]">
           {/* Mobile image */}
-          <div className="relative h-[320px] sm:h-[400px] lg:hidden">
+          <motion.div
+            initial={{
+              opacity: 0,
+              scale: 1.04,
+            }}
+            whileInView={{
+              opacity: 1,
+              scale: 1,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.2,
+            }}
+            transition={{
+              duration: 1,
+              delay: 0.5,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="relative h-[320px] overflow-hidden sm:h-[400px] lg:hidden"
+          >
             <img
-              src="/images/career-growth.jpg"
+              src={growth}
               alt="Mountain landscape representing growth and progress"
               className="h-full w-full object-cover object-center"
             />
 
             <div className="absolute inset-0 bg-gradient-to-t from-[#F3F7FB] via-transparent to-transparent" />
-          </div>
+          </motion.div>
 
           {/* Left Content */}
-          <div className="relative flex min-h-[560px] items-center px-5 py-16 sm:px-8 sm:py-20 lg:min-h-[620px] lg:px-12 lg:py-24 xl:px-16">
+          <motion.div
+            variants={contentVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{
+              once: true,
+              amount: 0.2,
+            }}
+            className="relative flex min-h-[560px] items-center px-5 py-16 sm:px-8 sm:py-20 lg:min-h-[620px] lg:px-12 lg:py-24 xl:px-16"
+          >
             <div className="max-w-[650px]">
               {/* Eyebrow */}
               <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#0056A6] sm:text-xs">
@@ -115,8 +216,18 @@ function CareerGrowth() {
               </p>
 
               {/* CTA */}
-              <a
+              <motion.a
                 href="#contact"
+                whileHover={{
+                  y: -2,
+                  scale: 1.02,
+                }}
+                whileTap={{
+                  scale: 0.98,
+                }}
+                transition={{
+                  duration: 0.2,
+                }}
                 className="
                   group
                   mt-9
@@ -132,7 +243,7 @@ function CareerGrowth() {
                   uppercase
                   tracking-[0.11em]
                   text-white
-                  transition-all
+                  transition-colors
                   duration-300
                   hover:bg-[#003F7A]
 
@@ -148,12 +259,21 @@ function CareerGrowth() {
                   strokeWidth={1.8}
                   className="transition-transform duration-300 group-hover:translate-x-1"
                 />
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Support Panel */}
-          <div className="relative z-10 flex items-center px-5 pb-16 sm:px-8 sm:pb-20 lg:px-8 lg:py-24 xl:px-14">
+          <motion.div
+            variants={panelVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{
+              once: true,
+              amount: 0.2,
+            }}
+            className="relative z-10 flex items-center px-5 pb-16 sm:px-8 sm:pb-20 lg:px-8 lg:py-24 xl:px-14"
+          >
             <div
               className="
                 w-full
@@ -197,11 +317,21 @@ function CareerGrowth() {
               </h3>
 
               {/* Support list */}
-              <div className="mt-10 border-y border-[#DCE5EF]">
+              <motion.div
+                variants={listVariants}
+                initial="hidden"
+                whileInView="show"
+                viewport={{
+                  once: true,
+                  amount: 0.25,
+                }}
+                className="mt-10 border-y border-[#DCE5EF]"
+              >
                 {focusAreas.map((area, index) => (
-                  <a
+                  <motion.a
                     key={area}
                     href="#contact"
+                    variants={listItemVariants}
                     className="
                       group
                       flex
@@ -239,17 +369,37 @@ function CareerGrowth() {
                       </span>
                     </div>
 
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-[#0056A6] transition-all duration-300 group-hover:translate-x-1 group-hover:bg-[#EAF3FC]">
+                    <motion.span
+                      whileHover={{
+                        x: 4,
+                      }}
+                      transition={{
+                        duration: 0.2,
+                      }}
+                      className="
+                        flex
+                        h-9
+                        w-9
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-full
+                        text-[#0056A6]
+                        transition-all
+                        duration-300
+                        group-hover:bg-[#EAF3FC]
+                      "
+                    >
                       <ArrowRight
                         size={18}
                         strokeWidth={1.7}
                       />
-                    </span>
-                  </a>
+                    </motion.span>
+                  </motion.a>
                 ))}
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 

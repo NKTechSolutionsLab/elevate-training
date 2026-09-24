@@ -1,14 +1,32 @@
 import React from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 function FinalCTA() {
+  const contentVariants = {
+    hidden: {
+      opacity: 0,
+      y: 35,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
   return (
     <section
       id="contact"
       className="relative overflow-hidden bg-[#0D2946] text-white"
     >
-      {/* Background Image */}
-      <img
+      {/* =========================
+          BACKGROUND IMAGE
+      ========================= */}
+      <motion.img
         src="/images/cta-background.jpg"
         alt=""
         aria-hidden="true"
@@ -18,24 +36,81 @@ function FinalCTA() {
           object-cover
           object-center
         "
+        initial={{
+          opacity: 0,
+          scale: 1.08,
+        }}
+        whileInView={{
+          opacity: 1,
+          scale: 1,
+        }}
+        viewport={{
+          once: true,
+          amount: 0.15,
+        }}
+        transition={{
+          duration: 1.3,
+          ease: [0.22, 1, 0.36, 1],
+        }}
       />
 
       {/* Image Overlay */}
-      <div className="absolute inset-0 bg-[#06233D]/70" />
+      <motion.div
+        className="absolute inset-0 bg-[#06233D]/70"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{
+          once: true,
+          amount: 0.15,
+        }}
+        transition={{
+          duration: 0.9,
+        }}
+      />
 
       {/* Subtle directional gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#06233D]/85 via-[#0D2946]/45 to-transparent" />
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-[#06233D]/85 via-[#0D2946]/45 to-transparent"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{
+          once: true,
+          amount: 0.15,
+        }}
+        transition={{
+          duration: 1,
+          delay: 0.15,
+        }}
+      />
 
-      {/* Content */}
+      {/* =========================
+          CONTENT
+      ========================= */}
       <div className="relative z-10 mx-auto max-w-[1500px] px-5 py-24 sm:px-8 sm:py-28 lg:px-12 lg:py-32 xl:px-16">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:gap-20">
-          {/* Main Statement */}
-          <div>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#A8D0ED] sm:text-xs">
-              Take the Next Step
-            </p>
 
-            <h2
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:gap-20">
+
+          {/* =================================
+              MAIN STATEMENT
+          ================================= */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+              once: true,
+              amount: 0.2,
+            }}
+          >
+            {/* Eyebrow */}
+            <motion.p
+              className="text-[11px] font-semibold uppercase tracking-[0.3em] text-[#A8D0ED] sm:text-xs"
+              variants={contentVariants}
+            >
+              Take the Next Step
+            </motion.p>
+
+            {/* Heading */}
+            <motion.h2
               className="
                 mt-6
                 max-w-[950px]
@@ -53,15 +128,22 @@ function FinalCTA() {
 
                 xl:text-[96px]
               "
+              variants={contentVariants}
+              transition={{
+                duration: 0.95,
+                delay: 0.08,
+                ease: [0.22, 1, 0.36, 1],
+              }}
             >
               Let&apos;s Build
               <br />
               <span className="italic text-[#66A9DC]">
                 What&apos;s Next.
               </span>
-            </h2>
+            </motion.h2>
 
-            <p
+            {/* Supporting copy */}
+            <motion.p
               className="
                 mt-8
                 max-w-[760px]
@@ -75,54 +157,113 @@ function FinalCTA() {
                 lg:text-[20px]
                 lg:leading-9
               "
+              variants={contentVariants}
+              transition={{
+                duration: 0.8,
+                delay: 0.18,
+                ease: [0.22, 1, 0.36, 1],
+              }}
             >
               Whether you&apos;re looking to grow in your career, strengthen
               your skills, develop your team, or move through a period of
               change with greater confidence, Elevate is here to help.
-            </p>
+            </motion.p>
 
             {/* Primary CTA */}
-            <a
-              href="#contact"
-              className="
-                group
-                mt-10
-                inline-flex
-                items-center
-                gap-3
-                rounded-full
-                bg-white
-                px-7
-                py-4
-                text-[11px]
-                font-semibold
-                uppercase
-                tracking-[0.11em]
-                text-[#0D2946]
-                transition-all
-                duration-300
-                hover:bg-[#66A9DC]
-
-                sm:px-8
-                sm:py-[18px]
-                sm:text-xs
-              "
+            <motion.div
+              className="mt-10"
+              variants={contentVariants}
+              transition={{
+                duration: 0.8,
+                delay: 0.28,
+                ease: [0.22, 1, 0.36, 1],
+              }}
             >
-              Let&apos;s Connect
+              <motion.a
+                href="#contact"
+                className="
+                  group
+                  inline-flex
+                  items-center
+                  gap-3
+                  rounded-full
+                  bg-white
+                  px-7
+                  py-4
+                  text-[11px]
+                  font-semibold
+                  uppercase
+                  tracking-[0.11em]
+                  text-[#0D2946]
+                  transition-colors
+                  duration-300
 
-              <ArrowRight
-                size={17}
-                strokeWidth={1.7}
-                className="transition-transform duration-300 group-hover:translate-x-1"
-              />
-            </a>
-          </div>
+                  sm:px-8
+                  sm:py-[18px]
+                  sm:text-xs
+                "
+                whileHover={{
+                  backgroundColor: "#66A9DC",
+                }}
+                whileTap={{
+                  scale: 0.98,
+                }}
+              >
+                Let&apos;s Connect
 
-          {/* Contact Statement */}
-          <div className="lg:justify-self-end lg:pb-3">
+                <ArrowRight
+                  size={17}
+                  strokeWidth={1.7}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </motion.a>
+            </motion.div>
+          </motion.div>
+
+          {/* =================================
+              CONTACT STATEMENT
+          ================================= */}
+          <motion.div
+            className="lg:justify-self-end lg:pb-3"
+            initial={{
+              opacity: 0,
+              x: 45,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.2,
+            }}
+            transition={{
+              duration: 0.85,
+              delay: 0.25,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
             <div className="max-w-[440px]">
+
               {/* Small line */}
-              <div className="mb-6 h-px w-14 bg-[#66A9DC]" />
+              <motion.div
+                className="mb-6 h-px bg-[#66A9DC]"
+                initial={{
+                  width: 0,
+                }}
+                whileInView={{
+                  width: 56,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.2,
+                }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.4,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              />
 
               <p className="text-[11px] font-semibold uppercase tracking-[0.25em] text-[#A8D0ED]">
                 Start a Conversation
@@ -150,7 +291,7 @@ function FinalCTA() {
                 can support your journey.
               </p>
 
-              <a
+              <motion.a
                 href="mailto:hello@elevate-training.co"
                 className="
                   group
@@ -166,6 +307,9 @@ function FinalCTA() {
                   transition-colors
                   hover:text-white
                 "
+                whileHover={{
+                  x: 3,
+                }}
               >
                 Start Your Conversation
 
@@ -173,27 +317,67 @@ function FinalCTA() {
                   size={16}
                   className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 />
-              </a>
+              </motion.a>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Bottom Brand Statement */}
-        <div className="mt-20 border-t border-white/20 pt-7 sm:mt-24">
+        {/* =================================
+            BOTTOM BRAND STATEMENT
+        ================================= */}
+        <motion.div
+          className="mt-20 border-t border-white/20 pt-7 sm:mt-24"
+          initial={{
+            opacity: 0,
+            y: 25,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.15,
+          }}
+          transition={{
+            duration: 0.75,
+            delay: 0.2,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+        >
           <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+
             <p className="font-serif text-2xl italic text-white/90 sm:text-3xl">
               People. Progress. Purpose.
             </p>
 
             <div className="flex items-center gap-3">
-              <span className="h-px w-8 bg-[#66A9DC]" />
+              <motion.span
+                className="h-px bg-[#66A9DC]"
+                initial={{
+                  width: 0,
+                }}
+                whileInView={{
+                  width: 32,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.15,
+                }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.35,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              />
 
               <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/45 sm:text-xs">
                 Elevate Training Services LLC
               </p>
             </div>
+
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

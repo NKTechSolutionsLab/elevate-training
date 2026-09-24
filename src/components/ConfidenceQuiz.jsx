@@ -1,18 +1,46 @@
 import React from "react";
 import { ArrowRight, Sparkles } from "lucide-react";
-import confi from "../images/confidence.png"
-
+import { motion } from "framer-motion";
+import confi from "../images/confidence.png";
 
 function ConfidenceQuiz() {
+  const container = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  };
+
+  const fadeUp = {
+    hidden: {
+      opacity: 0,
+      y: 32,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.75,
+        ease: [0.22, 1, 0.36, 1],
+      },
+    },
+  };
+
   return (
     <section
       id="resources"
       className="overflow-hidden bg-[#F3F7FB]"
     >
       <div className="mx-auto grid max-w-[1500px] grid-cols-1 lg:grid-cols-2">
-        {/* Image Side */}
+
+        {/* =========================
+            IMAGE SIDE
+        ========================= */}
         <div className="relative min-h-[440px] overflow-hidden sm:min-h-[520px] lg:min-h-[680px]">
-          <img
+
+          <motion.img
             src={confi}
             alt="A professional reflecting on confidence and personal growth"
             className="
@@ -20,20 +48,83 @@ function ConfidenceQuiz() {
               w-full
               object-cover
               object-center
-
-              lg:object-center
             "
+            initial={{
+              scale: 1.08,
+              opacity: 0,
+            }}
+            whileInView={{
+              scale: 1,
+              opacity: 1,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.25,
+            }}
+            transition={{
+              duration: 1.1,
+              ease: [0.22, 1, 0.36, 1],
+            }}
           />
 
           {/* Image overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0D2946]/45 via-transparent to-transparent" />
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-t from-[#0D2946]/45 via-transparent to-transparent"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{
+              once: true,
+              amount: 0.25,
+            }}
+            transition={{
+              duration: 0.9,
+              delay: 0.2,
+              ease: "easeOut",
+            }}
+          />
 
           {/* Resource badge */}
-          <div className="absolute bottom-7 left-7 sm:bottom-9 sm:left-9 lg:bottom-12 lg:left-12">
+          <motion.div
+            className="absolute bottom-7 left-7 sm:bottom-9 sm:left-9 lg:bottom-12 lg:left-12"
+            initial={{
+              opacity: 0,
+              y: 24,
+            }}
+            whileInView={{
+              opacity: 1,
+              y: 0,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.25,
+            }}
+            transition={{
+              duration: 0.7,
+              delay: 0.35,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
             <div className="flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/45 bg-white/15 text-white backdrop-blur-md">
+
+              <motion.div
+                className="flex h-12 w-12 items-center justify-center rounded-full border border-white/45 bg-white/15 text-white backdrop-blur-md"
+                initial={{ scale: 0.75, opacity: 0 }}
+                whileInView={{
+                  scale: 1,
+                  opacity: 1,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.25,
+                }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
                 <Sparkles size={20} strokeWidth={1.5} />
-              </div>
+              </motion.div>
 
               <div>
                 <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/70">
@@ -45,23 +136,51 @@ function ConfidenceQuiz() {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Content Side */}
-        <div className="flex items-center bg-white px-5 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24 xl:px-20 xl:py-28">
+        {/* =========================
+            CONTENT SIDE
+        ========================= */}
+        <motion.div
+          className="flex items-center bg-white px-5 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24 xl:px-20 xl:py-28"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{
+            once: true,
+            amount: 0.2,
+          }}
+          variants={container}
+        >
           <div className="max-w-[680px]">
+
             {/* Eyebrow */}
-            <div className="flex items-center gap-3">
-              <span className="h-px w-10 bg-[#0056A6]" />
+            <motion.div
+              className="flex items-center gap-3"
+              variants={fadeUp}
+            >
+              <motion.span
+                className="h-px w-10 bg-[#0056A6]"
+                initial={{ width: 0 }}
+                whileInView={{ width: 40 }}
+                viewport={{
+                  once: true,
+                  amount: 0.2,
+                }}
+                transition={{
+                  duration: 0.6,
+                  delay: 0.15,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              />
 
               <span className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#0056A6]">
                 Discover More About Yourself
               </span>
-            </div>
+            </motion.div>
 
             {/* Heading */}
-            <h2
+            <motion.h2
               className="
                 mt-7
                 font-serif
@@ -74,16 +193,17 @@ function ConfidenceQuiz() {
 
                 lg:text-[70px]
               "
+              variants={fadeUp}
             >
               Discover Your
               <br />
               <span className="italic text-[#1769AA]">
                 Confidence Archetype.
               </span>
-            </h2>
+            </motion.h2>
 
             {/* Main copy */}
-            <p
+            <motion.p
               className="
                 mt-8
                 max-w-[620px]
@@ -97,13 +217,14 @@ function ConfidenceQuiz() {
                 lg:text-[19px]
                 lg:leading-9
               "
+              variants={fadeUp}
             >
               Discover where you are today, gain a better understanding of
               your confidence, and identify a clearer place to begin.
-            </p>
+            </motion.p>
 
             {/* Secondary copy */}
-            <p
+            <motion.p
               className="
                 mt-5
                 max-w-[580px]
@@ -114,15 +235,19 @@ function ConfidenceQuiz() {
                 sm:text-base
                 sm:leading-7
               "
+              variants={fadeUp}
             >
               In just a few minutes, the Confidence Archetype Quiz can help
               you better understand where you are and receive personalized
               insight to help you move forward.
-            </p>
+            </motion.p>
 
             {/* CTA */}
-            <div className="mt-10">
-              <a
+            <motion.div
+              className="mt-10"
+              variants={fadeUp}
+            >
+              <motion.a
                 href="#"
                 className="
                   group
@@ -138,14 +263,19 @@ function ConfidenceQuiz() {
                   uppercase
                   tracking-[0.11em]
                   text-white
-                  transition-all
+                  transition-colors
                   duration-300
-                  hover:bg-[#003F7A]
 
                   sm:px-8
                   sm:py-[18px]
                   sm:text-xs
                 "
+                whileHover={{
+                  backgroundColor: "#003F7A",
+                }}
+                whileTap={{
+                  scale: 0.98,
+                }}
               >
                 Take the Free Quiz
 
@@ -154,12 +284,16 @@ function ConfidenceQuiz() {
                   strokeWidth={1.7}
                   className="transition-transform duration-300 group-hover:translate-x-1"
                 />
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
 
             {/* Bottom reassurance */}
-            <div className="mt-12 border-t border-[#DCE5EF] pt-6">
+            <motion.div
+              className="mt-12 border-t border-[#DCE5EF] pt-6"
+              variants={fadeUp}
+            >
               <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+
                 <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#0056A6]">
                   A simple first step
                 </span>
@@ -169,10 +303,12 @@ function ConfidenceQuiz() {
                 <p className="text-sm leading-6 text-[#7A8D9F]">
                   Reflect. Discover. Understand. Move forward.
                 </p>
+
               </div>
-            </div>
+            </motion.div>
+
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
